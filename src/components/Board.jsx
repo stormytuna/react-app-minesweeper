@@ -4,7 +4,7 @@ import { deepClone } from "../utils/helpers";
 import { revealCells } from "../utils/reveal-cells";
 import { Cell } from "./Cell";
 
-export function Board({ rows: numRows, columns: numColumns, mines: numMines, increaseNumRevealed, startTimer }) {
+export function Board({ rows: numRows, columns: numColumns, mines: numMines, gameState, increaseNumRevealed, startTimer, loseGame }) {
   const [board, setBoard] = useState([]);
   const [timerStarted, setTimerStarted] = useState(false);
 
@@ -28,15 +28,24 @@ export function Board({ rows: numRows, columns: numColumns, mines: numMines, inc
   const revealCell = (row, column) => {
     const newBoard = deepClone(board);
 
-    const { board: revealedBoard, numRevealed } = revealCells(newBoard, row, numRows, column, numColumns);
+    // Reveal necessary cells
+    const { board: revealedBoard, numRevealed, clickedBomb } = revealCells(newBoard, row, numRows, column, numColumns);
     increaseNumRevealed(numRevealed);
 
+    // Start our timer if we haven't already
     if (!timerStarted) {
       startTimer();
       setTimerStarted(true);
     }
 
+    // Set our state
     setBoard(revealedBoard);
+
+    // Check if we clicked a bomb
+    if (clickedBomb) {
+      console.log("yomama");
+      loseGame();
+    }
   };
 
   return (
@@ -45,7 +54,7 @@ export function Board({ rows: numRows, columns: numColumns, mines: numMines, inc
         return (
           <div className="board-row">
             {row.map((cell) => {
-              return <Cell {...cell} toggleFlag={toggleFlag} revealCell={revealCell} />;
+              return <Cell {...cell} toggleFlag={toggleFlag} revealCell={revealCell} gameState={gameState} />;
             })}
           </div>
         );

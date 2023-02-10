@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import images from "../images/images";
 
-export function Cell({ value, revealed, flagged, x, y, toggleFlag, revealCell }) {
+export function Cell({ value, revealed, flagged, x, y, toggleFlag, revealCell, gameState }) {
   const [isHovering, setIsHovering] = useState(false);
   const [image, setImage] = useState("");
 
@@ -48,8 +48,14 @@ export function Cell({ value, revealed, flagged, x, y, toggleFlag, revealCell })
   }, [revealed, flagged, isHovering]);
 
   return (
-    <div className="board-cell" onClick={() => revealCell(x, y)} onContextMenu={(e) => toggleFlag(e, x, y)} onMouseEnter={() => setIsHovering(true)} onMouseLeave={() => setIsHovering(false)}>
-      <img src={image} />
+    <div
+      className="board-cell"
+      onClick={() => gameState === "play" && revealCell(x, y)}
+      onContextMenu={(e) => gameState === "play" && toggleFlag(e, x, y)}
+      onMouseEnter={() => gameState === "play" && setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+    >
+      <img src={image} onDragStart={(e) => e.preventDefault()} />
     </div>
   );
 }

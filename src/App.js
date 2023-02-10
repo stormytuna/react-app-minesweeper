@@ -16,8 +16,9 @@ function App() {
   const [gameStats, setGameStats] = useState({
     revealedCells: 0,
     totalCells: 216,
+    state: "play",
   });
-  const { seconds, minutes, reset, start } = useStopwatch({ autoStart: false });
+  const { seconds, minutes, reset, start, pause } = useStopwatch({ autoStart: false });
 
   const setGameSize = (numRows, numColumns, numMines) => {
     // Set gameOptions stuff
@@ -40,6 +41,20 @@ function App() {
   const increaseNumRevealed = (numRevealed) => {
     const newGameStats = deepClone(gameStats);
     newGameStats.revealedCells += numRevealed;
+
+    // Check if we've won
+    if (newGameStats.revealedCells === newGameStats.totalCells) {
+      newGameStats.state = "win";
+      pause();
+    }
+
+    setGameStats(newGameStats);
+  };
+
+  const loseGame = () => {
+    const newGameStats = deepClone(gameStats);
+    newGameStats.state = "lose";
+    pause();
     setGameStats(newGameStats);
   };
 
@@ -48,7 +63,7 @@ function App() {
       <h1>Minesweeper :D</h1>
       <GameOptions setGameSize={setGameSize} />
       <GameStats {...gameStats} seconds={seconds} minutes={minutes} />
-      <Board {...gameOptions} increaseNumRevealed={increaseNumRevealed} startTimer={start} />
+      <Board {...gameOptions} gameState={gameStats.state} increaseNumRevealed={increaseNumRevealed} startTimer={start} loseGame={loseGame} />
     </div>
   );
 }

@@ -7,8 +7,8 @@
 export function revealCells(board, row, numRows, column, numColumns) {
   let cell = board[row][column];
 
-  // Early return if our clicked cell is already revealed
-  if (cell.revealed) {
+  // Early return if our clicked cell is already revealed or a flag
+  if (cell.revealed || cell.flagged) {
     return { board, numRevealed: 0 };
   }
 
@@ -24,7 +24,11 @@ export function revealCells(board, row, numRows, column, numColumns) {
       numRevealed++;
     }
 
-    // TODO: Only do this on empty cells
+    // Early return if it's a bomb
+    if (cell.value === "X") {
+      return { board, numRevealed, clickedBomb: true };
+    }
+
     // Loop through all adjacent cells...
     for (let x = -1; x <= 1; x++) {
       for (let y = -1; y <= 1; y++) {
