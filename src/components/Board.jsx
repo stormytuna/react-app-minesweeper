@@ -14,9 +14,11 @@ export function Board({ board, setBoard, rows: numRows, columns: numColumns, gam
 
     const newBoard = deepClone(board);
     const cell = newBoard[x][y];
-    cell.flagged = !cell.flagged;
-    increaseFlagsPlaced(cell.flagged ? 1 : -1);
-    setBoard(newBoard);
+    if (!cell.revealed) {
+      cell.flagged = !cell.flagged;
+      increaseFlagsPlaced(cell.flagged ? 1 : -1);
+      setBoard(newBoard);
+    }
   };
 
   const revealCell = (row, column) => {

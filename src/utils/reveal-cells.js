@@ -42,10 +42,10 @@ export function revealCells(board, row, numRows, column, numColumns) {
         const adjacentCell = board[rowToCheck][columnToCheck];
 
         // Two cases:
-        //   1: Our adjacent cell isn't empty or a bomb - We should reveal it
+        //   1: Our adjacent cell isn't empty or a bomb or a flag - We should reveal it
         //   2: Our adjacent cell is empty and hasn't been revealed - We should add it to our list of cells to reveal around
         // (Basically doing poor man's recursion)
-        if (adjacentCell.value !== "0" && adjacentCell.value !== "X") {
+        if (adjacentCell.value !== "0" && adjacentCell.value !== "X" && !adjacentCell.flagged) {
           if (!adjacentCell.revealed) {
             adjacentCell.revealed = true;
             numRevealed++;
