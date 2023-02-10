@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { createBoard } from "../utils/create-board";
+import { deepClone } from "../utils/helpers";
 import { revealCells } from "../utils/reveal";
 import { Cell } from "./Cell";
 
-export function Board({ numRows, numColumns }) {
+export function Board({ rows: numRows, columns: numColumns, mines: numMines }) {
   const [board, setBoard] = useState([]);
 
   useEffect(() => {
-    const newBoard = createBoard(numRows, numColumns, 10);
+    const newBoard = createBoard(numRows, numColumns, numMines);
     setBoard(newBoard);
-  }, [numRows, numColumns]);
+  }, [numRows, numColumns, numMines]);
 
   if (!board) {
     return <h2>Loading...</h2>;
@@ -18,13 +19,13 @@ export function Board({ numRows, numColumns }) {
   const toggleFlag = (e, x, y) => {
     e.preventDefault();
 
-    const newBoard = JSON.parse(JSON.stringify(board));
+    const newBoard = deepClone(board);
     newBoard[x][y].flagged = !newBoard[x][y].flagged;
     setBoard(newBoard);
   };
 
   const revealCell = (row, column) => {
-    const newBoard = JSON.parse(JSON.stringify(board));
+    const newBoard = deepClone(board);
 
     const revealedBoard = revealCells(newBoard, row, numRows, column, numColumns);
 

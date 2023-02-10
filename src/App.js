@@ -3,17 +3,28 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useState } from "react";
 import { Board } from "./components/Board";
 import { GameOptions } from "./components/GameOptions";
+import { deepClone } from "./utils/helpers";
 
 function App() {
-  const [numRows, setNumRows] = useState(10);
-  const [numColumns, setNumColumns] = useState(14);
-  const [numMines, setNumMines] = useState(8);
+  const [gameOptions, setGameOptions] = useState({
+    rows: 16,
+    columns: 16,
+    mines: 40,
+  });
+
+  const setGameSize = (numRows, numColumns, numMines) => {
+    const newGameOptions = deepClone(gameOptions);
+    newGameOptions.rows = numRows;
+    newGameOptions.columns = numColumns;
+    newGameOptions.mines = numMines;
+    setGameOptions(newGameOptions);
+  };
 
   return (
     <div className="App">
       <h1>Minesweeper :D</h1>
-      <GameOptions setNumRows={setNumRows} setNumColumns={setNumColumns} setNumMines={setNumMines} />
-      <Board numRows={numRows} numColumns={numColumns} numMines={numMines} />
+      <GameOptions setGameSize={setGameSize} />
+      <Board {...gameOptions} />
     </div>
   );
 }
