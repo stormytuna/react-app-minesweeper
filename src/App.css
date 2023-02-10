@@ -1,5 +1,20 @@
 .App {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  width: 600px;
+  padding: 10px;
+
+  font-size: large;
+  font-weight: 400;
+  font-family: "Roboto Mono", monospace;
 }
 
 .board {

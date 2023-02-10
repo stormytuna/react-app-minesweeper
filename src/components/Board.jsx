@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { createBoard } from "../utils/create-board";
 import { deepClone } from "../utils/helpers";
-import { revealCells } from "../utils/reveal";
+import { revealCells } from "../utils/reveal-cells";
 import { Cell } from "./Cell";
 
-export function Board({ rows: numRows, columns: numColumns, mines: numMines }) {
+export function Board({ rows: numRows, columns: numColumns, mines: numMines, increaseNumRevealed, startTimer }) {
   const [board, setBoard] = useState([]);
+  const [timerStarted, setTimerStarted] = useState(false);
 
   useEffect(() => {
     const newBoard = createBoard(numRows, numColumns, numMines);
@@ -27,7 +28,13 @@ export function Board({ rows: numRows, columns: numColumns, mines: numMines }) {
   const revealCell = (row, column) => {
     const newBoard = deepClone(board);
 
-    const revealedBoard = revealCells(newBoard, row, numRows, column, numColumns);
+    const { board: revealedBoard, numRevealed } = revealCells(newBoard, row, numRows, column, numColumns);
+    increaseNumRevealed(numRevealed);
+
+    if (!timerStarted) {
+      startTimer();
+      setTimerStarted(true);
+    }
 
     setBoard(revealedBoard);
   };
