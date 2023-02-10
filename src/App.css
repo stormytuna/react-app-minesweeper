@@ -9,12 +9,18 @@
   display: flex;
   justify-content: space-around;
   margin: auto;
-  width: 600px;
+  width: 900px;
   padding: 10px;
 
   font-size: large;
   font-weight: 400;
   font-family: "Roboto Mono", monospace;
+}
+
+.game-options {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
 }
 
 .board {

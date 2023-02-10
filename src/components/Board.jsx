@@ -4,14 +4,8 @@ import { deepClone } from "../utils/helpers";
 import { revealCells } from "../utils/reveal-cells";
 import { Cell } from "./Cell";
 
-export function Board({ rows: numRows, columns: numColumns, mines: numMines, gameState, increaseNumRevealed, startTimer, loseGame }) {
-  const [board, setBoard] = useState([]);
+export function Board({ board, setBoard, rows: numRows, columns: numColumns, gameState, increaseNumRevealed, increaseFlagsPlaced, startTimer, loseGame }) {
   const [timerStarted, setTimerStarted] = useState(false);
-
-  useEffect(() => {
-    const newBoard = createBoard(numRows, numColumns, numMines);
-    setBoard(newBoard);
-  }, [numRows, numColumns, numMines]);
 
   if (!board) {
     return <h2>Loading...</h2>;
@@ -21,7 +15,9 @@ export function Board({ rows: numRows, columns: numColumns, mines: numMines, gam
     e.preventDefault();
 
     const newBoard = deepClone(board);
-    newBoard[x][y].flagged = !newBoard[x][y].flagged;
+    const cell = newBoard[x][y];
+    cell.flagged = !cell.flagged;
+    increaseFlagsPlaced(cell.flagged ? 1 : -1);
     setBoard(newBoard);
   };
 
@@ -43,7 +39,6 @@ export function Board({ rows: numRows, columns: numColumns, mines: numMines, gam
 
     // Check if we clicked a bomb
     if (clickedBomb) {
-      console.log("yomama");
       loseGame();
     }
   };
