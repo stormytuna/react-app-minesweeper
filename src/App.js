@@ -23,7 +23,7 @@ function App() {
     state: "play",
   });
   const [board, setBoard] = useState([]);
-  const { seconds, minutes, reset, start, pause } = useStopwatch({ autoStart: false });
+  const { seconds, minutes, reset, start, pause, isRunning } = useStopwatch({ autoStart: false });
 
   // Reset game
   useEffect(() => {
@@ -50,8 +50,8 @@ function App() {
     setGameStats(newGameStats);
 
     // Reset our stopwatch
-    reset();
     pause();
+    reset();
 
     // Reset our board
     resetBoard();
@@ -114,6 +114,8 @@ function App() {
     setGameStats(newGameStats);
   };
 
+  const startTimer = () => !isRunning && (start() || reset());
+
   return (
     <div className="App">
       <h1>Minesweeper :D</h1>
@@ -126,7 +128,7 @@ function App() {
         gameState={gameStats.state}
         increaseNumRevealed={increaseNumRevealed}
         increaseFlagsPlaced={increaseFlagsPlaced}
-        startTimer={start}
+        startTimer={startTimer}
         loseGame={loseGame}
       />
     </div>

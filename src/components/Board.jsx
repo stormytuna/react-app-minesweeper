@@ -5,8 +5,6 @@ import { revealCells } from "../utils/reveal-cells";
 import { Cell } from "./Cell";
 
 export function Board({ board, setBoard, rows: numRows, columns: numColumns, gameState, increaseNumRevealed, increaseFlagsPlaced, startTimer, loseGame }) {
-  const [timerStarted, setTimerStarted] = useState(false);
-
   if (!board) {
     return <h2>Loading...</h2>;
   }
@@ -29,10 +27,7 @@ export function Board({ board, setBoard, rows: numRows, columns: numColumns, gam
     increaseNumRevealed(numRevealed);
 
     // Start our timer if we haven't already
-    if (!timerStarted) {
-      startTimer();
-      setTimerStarted(true);
-    }
+    startTimer();
 
     // Set our state
     setBoard(revealedBoard);
