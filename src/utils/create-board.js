@@ -1,9 +1,5 @@
-import { Random } from "random-js";
-
 export function createBoard(numRows, numColumns, numBombs) {
-  const random = new Random();
   const board = [];
-  const mineLocations = [];
 
   // First, create a blank board, just a jagged array of cell objects
   for (let x = 0; x < numRows; x++) {
@@ -28,13 +24,12 @@ export function createBoard(numRows, numColumns, numBombs) {
 
   let bombsPlaced = 0;
   while (bombsPlaced < numBombs) {
-    const x = random.integer(0, numRows - 1); // random-js .integer method is inclusive for some reason...
-    const y = random.integer(0, numColumns - 1);
+    const x = randomInteger(0, numRows);
+    const y = randomInteger(0, numColumns);
     const cell = board[x][y];
 
     if (cell.value === "0") {
       cell.value = "X";
-      mineLocations.push([x, y]);
       bombsPlaced++;
     }
   }
@@ -81,4 +76,8 @@ export function createBoard(numRows, numColumns, numBombs) {
   }
 
   return board;
+}
+
+function randomInteger(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
