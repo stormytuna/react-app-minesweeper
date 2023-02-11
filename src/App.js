@@ -9,6 +9,7 @@ import { useStopwatch } from "react-timer-hook";
 import { createBoard } from "./utils/create-board";
 import winSound from "./audio/fnaf-yay.mp3";
 import JSConfetti from "js-confetti";
+import { Footer } from "./components/Footer";
 
 function App() {
   const [gameOptions, setGameOptions] = useState({
@@ -136,7 +137,7 @@ function App() {
         startTimer={startTimer}
         loseGame={loseGame}
       />
-      {/* TODO: Add a footer with links to my github, other stuff, etc etc */}
+      <Footer />
     </div>
   );
 }
