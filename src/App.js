@@ -136,6 +136,7 @@ function App() {
         startTimer={startTimer}
         loseGame={loseGame}
       />
+      {/* TODO: Add a footer with links to my github, other stuff, etc etc */}
     </div>
   );
 }
