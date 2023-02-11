@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { createBoard } from "../utils/create-board";
 import { deepClone } from "../utils/helpers";
 import { revealCells } from "../utils/reveal-cells";
 import { Cell } from "./Cell";
@@ -28,7 +26,7 @@ export function Board({ board, setBoard, rows: numRows, columns: numColumns, gam
     const { board: revealedBoard, numRevealed, clickedBomb } = revealCells(newBoard, row, numRows, column, numColumns);
     increaseNumRevealed(numRevealed);
 
-    // Start our timer if we haven't already
+    // Start our timer
     startTimer();
 
     // Set our state

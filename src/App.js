@@ -50,8 +50,8 @@ function App() {
     setGameStats(newGameStats);
 
     // Reset our stopwatch
-    pause();
     reset();
+    pause();
 
     // Reset our board
     resetBoard();
@@ -114,7 +114,12 @@ function App() {
     setGameStats(newGameStats);
   };
 
-  const startTimer = () => !isRunning && (start() || reset());
+  const startTimer = () => {
+    if (!isRunning) {
+      start();
+      reset();
+    }
+  };
 
   return (
     <div className="App">
