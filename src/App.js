@@ -123,7 +123,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Minesweeper :D</h1>
+      <h1>MINESWEEPER</h1>
       <GameOptions setGameSize={setGameSize} resetGame={resetGame} />
       <GameStats {...gameStats} seconds={seconds} minutes={minutes} totalMines={gameOptions.mines} />
       <Board

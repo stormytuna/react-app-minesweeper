@@ -1,10 +1,25 @@
-/* TODO: Make it prettier!! */
+html {
+  background-color: rgb(192, 192, 192);
+}
 
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+
+  background-color: rgb(192, 192, 192);
+
+  font-weight: 400;
+  font-family: "Roboto Mono", monospace;
+
+  padding: 20px;
+  padding-top: 50px;
+}
+
+.App h1 {
+  font-size: xx-large;
+  padding: 10px;
 }
 
 .game-stats {
@@ -14,9 +29,20 @@
   width: 900px;
   padding: 10px;
 
-  font-size: large;
+  font-size: medium;
+  font-weight: 500;
+}
+
+.game-stats span {
   font-weight: 400;
-  font-family: "Roboto Mono", monospace;
+  padding: 5px;
+  background-color: rgb(201, 201, 201);
+  border: outset rgb(163, 163, 163);
+}
+
+.game-stats span span {
+  font-weight: 600;
+  border: none;
 }
 
 .game-options {
@@ -27,8 +53,10 @@
 
 .board {
   margin: auto;
-  padding: 10px;
+  padding: 5px;
   width: fit-content;
+  background-color: rgb(177, 177, 177);
+  border: 10px outset rgb(163, 163, 163);
 }
 
 .board-row {
