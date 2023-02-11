@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-app-minesweeper/static/css/main.ccebbaf7.css",
-    "main.js": "/react-app-minesweeper/static/js/main.af551fe8.js",
+    "main.js": "/react-app-minesweeper/static/js/main.dfdc7c23.js",
     "static/media/fnaf-yay.mp3": "/react-app-minesweeper/static/media/fnaf-yay.ab1628f4e642af2564ef.mp3",
     "index.html": "/react-app-minesweeper/index.html",
     "main.ccebbaf7.css.map": "/react-app-minesweeper/static/css/main.ccebbaf7.css.map",
-    "main.af551fe8.js.map": "/react-app-minesweeper/static/js/main.af551fe8.js.map"
+    "main.dfdc7c23.js.map": "/react-app-minesweeper/static/js/main.dfdc7c23.js.map"
   },
   "entrypoints": [
     "static/css/main.ccebbaf7.css",
-    "static/js/main.af551fe8.js"
+    "static/js/main.dfdc7c23.js"
   ]
 }
